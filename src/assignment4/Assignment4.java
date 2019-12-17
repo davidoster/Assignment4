@@ -30,7 +30,7 @@ public class Assignment4 {
 //                (endTime - startTime));
         
         long startTime = System.currentTimeMillis();
-        tShirts = generateTShirts(4,1);
+        tShirts = generateTShirts(8,1);
         sort = new Sort(tShirts);
         long endTime = System.currentTimeMillis();
         System.out.println("Generation of 4 TShirts (type 1) on: " + 
@@ -39,13 +39,17 @@ public class Assignment4 {
         printTShirts(tShirts);
         System.out.println("Sorted Array");
         
+        // Quick Sort ASC
+        printTShirts(sort.quickSortBySize(tShirts, 0, tShirts.size()-1));
+        
+        // Quick Sort DESC
         
         
         // Bubble Sort ASC
-        printTShirts(sort.sortBySize(1, 0));
+        //printTShirts(sort.sortBySize(1, 0));
         
         // Bubble Sort DESC
-        printTShirts(sort.sortBySize(1, 1));
+        //printTShirts(sort.sortBySize(1, 1));
         
         
         
