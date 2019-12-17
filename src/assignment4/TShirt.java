@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author George.Pasparakis
  */
-public class TShirt {
+public class TShirt implements Comparable {
     private String name;
     private Color color;
     private Size size;
@@ -60,11 +60,11 @@ public class TShirt {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.name);
-        hash = 83 * hash + Objects.hashCode(this.color);
-        hash = 83 * hash + Objects.hashCode(this.size);
-        hash = 83 * hash + Objects.hashCode(this.fabric);
+        int hash = 3;
+        hash = 2 * hash + Objects.hashCode(this.name);
+        hash = 2 * hash + Objects.hashCode(this.color);
+        hash = 2 * hash + Objects.hashCode(this.size);
+        hash = 2 * hash + Objects.hashCode(this.fabric);
         return hash;
     }
 
@@ -93,6 +93,10 @@ public class TShirt {
             return false;
         }
         return true;
+    }     
+
+    @Override
+    public int compareTo(Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-     
 }

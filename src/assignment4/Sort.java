@@ -6,7 +6,10 @@
 package assignment4;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import static java.util.Objects.hash;
 
 /**
  *
@@ -34,7 +37,7 @@ public class Sort {
     sortOrder = 0, ASC
     sortOrder = 1, DESC
     */
-    public List<TShirt> sortBySize(int sortMethod, int sortOrder) {
+    public List<TShirt> sortBySize(int sortMethod, int sortOrder, int buckets) {
         List<TShirt> shirts = new ArrayList<TShirt>(this.tShirts);
         switch(sortMethod) {
             case 0:
@@ -44,13 +47,11 @@ public class Sort {
                 shirts = bubbleSortBySize(sortOrder);
                 break;
             case 2:
-                
-                // shirts = bucketSortBySize(sortOrder);
+                shirts = bucketSortBySize(sortOrder, buckets);
                 break;
         }
         
         return shirts;
-    
     }
     
     /*
@@ -167,7 +168,7 @@ public class Sort {
         return i+1; 
     }
     
-    public List<TShirt> quickSortBySize(int low, int high, int sortOrder) 
+    private List<TShirt> quickSortBySize(int low, int high, int sortOrder) 
     { 
         List<TShirt> arr = this.tShirts;
         List<TShirt> arr2 = arr; 
@@ -185,4 +186,37 @@ public class Sort {
         return arr2;
     } 
     
+    private List<TShirt> bucketSortBySize(int sortOrder, int noOfBuckets) {
+        List<TShirt> shirts = this.tShirts;
+        shirts = bucketSort(shirts, noOfBuckets, sortOrder);
+        return shirts;
+    }
+    
+    private List<TShirt> bucketSort(List<TShirt> shirts, int noOfBuckets, int sortOrder){
+        // Create bucket array
+        List<TShirt>[] buckets = new List[noOfBuckets];
+        // Associate a list with each index 
+        // in the bucket array         
+        for(int i = 0; i < noOfBuckets; i++){
+            buckets[i] = new LinkedList<>();
+        }
+        // Assign numbers from array to the proper bucket
+        // by using hashing function
+        for(TShirt tshirt : shirts){
+            //System.out.println("hash- " + hash(num));
+            buckets[tshirt.hashCode()].add(tshirt);
+        }
+        // sort buckets
+        for(List<TShirt> bucket : buckets){
+            Collections.sort(bucket);
+        }
+        int i = 0;
+        // Merge buckets to get sorted array
+        for(List<TShirt> bucket : buckets){
+            for(TShirt num : bucket){
+                shirts.set(i++, num);
+            }
+        }
+        return shirts;
+    }
 }

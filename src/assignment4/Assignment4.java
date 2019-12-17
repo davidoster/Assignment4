@@ -22,16 +22,11 @@ public class Assignment4 {
     public static void main(String[] args) {
         // TODO code application logic here
         List<TShirt> tShirts = new ArrayList<TShirt>();
-        Sort sort;
-        
-        IntegerBucketSorter sorter = new IntegerBucketSorter();
-        List<Integer> unsorted = Arrays.asList(80,50,60,30,20,10,70,0,40,500,600,602,200,15);
-        List<Integer> expected = Arrays.asList(0,10,15,20,30,40,50,60,70,80,200,500,600,602);
-
-        List<Integer> actual = sorter.sort(unsorted);
-        for(Integer i: actual) {
-            System.out.println(i);
-        }
+        tShirts = generateTShirts(4,0);
+        Sort sort = new Sort(tShirts);
+        printTShirts(tShirts);
+        sort.sortBySize(2, 0, 5);
+        printTShirts(tShirts);
         
 //        long startTime = System.currentTimeMillis();
 //        tShirts = generateTShirts(4000,0); 
@@ -59,7 +54,7 @@ public class Assignment4 {
 //        printTShirts(sort.sortBySize(0, 1));
         
 //        System.out.println("ORIGINAL");
-        printTShirts(tShirts);
+        
         
         // Bubble Sort ASC
         //printTShirts(sort.sortBySize(1, 0));
@@ -108,6 +103,7 @@ public class Assignment4 {
         }
         return s;
     }
+    
     public static Color randomColor() {
         Random random = new Random();
         return Color.values()[random.nextInt(Color.values().length)];
@@ -122,8 +118,6 @@ public class Assignment4 {
         Random random = new Random();
         return Fabric.values()[random.nextInt(Fabric.values().length)];
     }
-    
-   
     
     public static void printTShirts(List<TShirt> tShirts) {
         for(TShirt e: tShirts) {
