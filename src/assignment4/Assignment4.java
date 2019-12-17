@@ -21,6 +21,8 @@ public class Assignment4 {
     public static void main(String[] args) {
         // TODO code application logic here
         List<TShirt> tShirts = new ArrayList<TShirt>();
+        Sort sort;
+        
 //        long startTime = System.currentTimeMillis();
 //        tShirts = generateTShirts(4000,0); 
 //        long endTime = System.currentTimeMillis();
@@ -28,14 +30,24 @@ public class Assignment4 {
 //                (endTime - startTime));
         
         long startTime = System.currentTimeMillis();
-        tShirts = generateTShirts(10,1);
+        tShirts = generateTShirts(4,1);
+        sort = new Sort(tShirts);
         long endTime = System.currentTimeMillis();
-        System.out.println("Generation of 40 TShirts (type 1) on: " + 
+        System.out.println("Generation of 4 TShirts (type 1) on: " + 
                 (endTime - startTime));
         System.out.println("UnSorted Array");
         printTShirts(tShirts);
         System.out.println("Sorted Array");
-        printTShirts(bubbleSortSize(tShirts,0));
+        
+        
+        
+        // Bubble Sort ASC
+        printTShirts(sort.sortBySize(1, 0));
+        
+        // Bubble Sort DESC
+        printTShirts(sort.sortBySize(1, 1));
+        
+        
         
     }
     
@@ -91,32 +103,7 @@ public class Assignment4 {
         return Fabric.values()[random.nextInt(Fabric.values().length)];
     }
     
-    /*
-    type = 0, ASC
-    type = 1, DESC
-    */
-    public static List<TShirt> bubbleSortSize(List<TShirt> tShirts, int type) 
-    { 
-        int n = tShirts.size(); 
-        List<TShirt> tempShirts = tShirts;
-        switch(type) {
-            case 0:
-                for (int i = 0; i < n-1; i++) {
-                    for (int j = 0; j < n-i-1; j++) 
-                        if (tempShirts.get(j).getSize().ordinal() > tempShirts.get(j+1).getSize().ordinal()) 
-                        { 
-                            TShirt temp = tempShirts.get(j); 
-                            tempShirts.set(j, tempShirts.get(j+1));
-                            tempShirts.set(j+1, temp); 
-                        }
-                }
-                break;
-            case 1:
-                break;
-        }
-        
-        return tempShirts;
-    } 
+   
     
     public static void printTShirts(List<TShirt> tShirts) {
         for(TShirt e: tShirts) {
