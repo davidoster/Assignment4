@@ -6,6 +6,7 @@
 package assignment4;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -23,32 +24,41 @@ public class Assignment4 {
         List<TShirt> tShirts = new ArrayList<TShirt>();
         Sort sort;
         
+        IntegerBucketSorter sorter = new IntegerBucketSorter();
+        List<Integer> unsorted = Arrays.asList(80,50,60,30,20,10,70,0,40,500,600,602,200,15);
+        List<Integer> expected = Arrays.asList(0,10,15,20,30,40,50,60,70,80,200,500,600,602);
+
+        List<Integer> actual = sorter.sort(unsorted);
+        for(Integer i: actual) {
+            System.out.println(i);
+        }
+        
 //        long startTime = System.currentTimeMillis();
 //        tShirts = generateTShirts(4000,0); 
 //        long endTime = System.currentTimeMillis();
 //        System.out.println("Generation of 40 TShirts (type 0) on: " +
 //                (endTime - startTime));
         
-        long startTime = System.currentTimeMillis();
-        tShirts = generateTShirts(3,1);
-        sort = new Sort(tShirts);
-        long endTime = System.currentTimeMillis();
-        System.out.println("Generation of 4 TShirts (type 1) on: " + 
-                (endTime - startTime));
-        System.out.println("UnSorted Array");
-        printTShirts(tShirts);
-        System.out.println("Sorted Array");
+//        long startTime = System.currentTimeMillis();
+//        tShirts = generateTShirts(3,1);
+//        sort = new Sort(tShirts);
+//        long endTime = System.currentTimeMillis();
+//        System.out.println("Generation of 4 TShirts (type 1) on: " + 
+//                (endTime - startTime));
+//        System.out.println("UnSorted Array");
+//        printTShirts(tShirts);
+//        System.out.println("Sorted Array");
         
         // Quick Sort ASC
-        System.out.println("QSASC");
-        printTShirts(sort.sortBySize(0, 0));
+//        System.out.println("QSASC");
+//        printTShirts(sort.sortBySize(0, 0));
         
         // Quick Sort DESC
-        System.out.println("QSDESC");
-        printTShirts(sort.quickSortBySize(0, tShirts.size()-1, 1));
+//        System.out.println("QSDESC");
+//        printTShirts(sort.quickSortBySize(0, tShirts.size()-1, 1));
 //        printTShirts(sort.sortBySize(0, 1));
         
-        System.out.println("ORIGINAL");
+//        System.out.println("ORIGINAL");
         printTShirts(tShirts);
         
         // Bubble Sort ASC
