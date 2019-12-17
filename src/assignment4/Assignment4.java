@@ -40,7 +40,7 @@ public class Assignment4 {
         System.out.println("Sorted Array");
         
         // Quick Sort ASC
-        printTShirts(sort.quickSortBySize(tShirts, 0, tShirts.size()-1));
+        printTShirts(sort.quickSortBySize(tShirts, 0, tShirts.size()-1, 1));
         
         // Quick Sort DESC
         

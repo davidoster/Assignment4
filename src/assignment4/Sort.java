@@ -39,7 +39,7 @@ public class Sort {
         shirts = this.tShirts;
         switch(sortMethod) {
             case 0:
-                shirts = quickSortBySize(shirts, 0, shirts.size()-1);
+                shirts = quickSortBySize(shirts, 0, shirts.size()-1, sortOrder);
                 break;
             case 1:
                 shirts = bubbleSortBySize(sortOrder);
@@ -127,22 +127,36 @@ public class Sort {
         return tempShirts;
     }
     
-    private int quickPartition(List<TShirt> arr, int low, int high) 
+    private int quickPartition(List<TShirt> arr, int low, int high, int sortOrder) 
     { 
         TShirt pivot = arr.get(high);  
         int i = (low-1); // index of smaller element 
         for (int j=low; j<high; j++) 
         { 
-            // If current element is smaller than the pivot 
-            if (arr.get(j).getSize().ordinal() < pivot.getSize().ordinal()) 
-            { 
-                i++; 
-  
-                // swap arr[i] and arr[j] 
-                TShirt temp = arr.get(i); 
-                arr.set(i, arr.get(j)); 
-                arr.set(j, temp); 
-            } 
+            if(sortOrder == 0) {
+                // If current element is smaller than the pivot 
+                if (arr.get(j).getSize().ordinal() < pivot.getSize().ordinal()) 
+                { 
+                    i++; 
+
+                    // swap arr[i] and arr[j] 
+                    TShirt temp = arr.get(i); 
+                    arr.set(i, arr.get(j)); 
+                    arr.set(j, temp); 
+                } 
+            }
+            else {
+                 // If current element is smaller than the pivot 
+                if (arr.get(j).getSize().ordinal() > pivot.getSize().ordinal()) 
+                { 
+                    i++; 
+
+                    // swap arr[i] and arr[j] 
+                    TShirt temp = arr.get(i); 
+                    arr.set(i, arr.get(j)); 
+                    arr.set(j, temp); 
+                } 
+            }
         } 
   
         // swap arr[i+1] and arr[high] (or pivot) 
@@ -152,19 +166,19 @@ public class Sort {
         return i+1; 
     }
     
-    public List<TShirt> quickSortBySize(List<TShirt> arr, int low, int high) 
+    public List<TShirt> quickSortBySize(List<TShirt> arr, int low, int high, int sortOrder) 
     { 
         List<TShirt> arr2 = arr; 
         if (low < high) 
         { 
             /* pi is partitioning index, arr[pi] is  
               now at right place */
-            int pi = quickPartition(arr2, low, high); 
+            int pi = quickPartition(arr2, low, high, sortOrder); 
   
             // Recursively sort elements before 
             // partition and after partition 
-            quickSortBySize(arr2, low, pi-1); 
-            quickSortBySize(arr2, pi+1, high); 
+            quickSortBySize(arr2, low, pi-1, sortOrder); 
+            quickSortBySize(arr2, pi+1, high, sortOrder); 
         } 
         return arr2;
     } 
