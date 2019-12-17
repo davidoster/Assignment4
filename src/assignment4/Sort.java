@@ -16,7 +16,7 @@ public class Sort {
     private List<TShirt> tShirts;
     
     Sort(List<TShirt> shirts) {
-        this.tShirts = shirts;
+        this.tShirts = new ArrayList<TShirt>(shirts);
     }
 
     public List<TShirt> gettShirts() {
@@ -35,16 +35,17 @@ public class Sort {
     sortOrder = 1, DESC
     */
     public List<TShirt> sortBySize(int sortMethod, int sortOrder) {
-        List<TShirt> shirts = new ArrayList<TShirt>();
-        shirts = this.tShirts;
+        List<TShirt> shirts = new ArrayList<TShirt>(this.tShirts);
         switch(sortMethod) {
             case 0:
-                shirts = quickSortBySize(shirts, 0, shirts.size()-1, sortOrder);
+                shirts = quickSortBySize(0, shirts.size()-1, sortOrder);
                 break;
             case 1:
                 shirts = bubbleSortBySize(sortOrder);
                 break;
             case 2:
+                
+                // shirts = bucketSortBySize(sortOrder);
                 break;
         }
         
@@ -166,8 +167,9 @@ public class Sort {
         return i+1; 
     }
     
-    public List<TShirt> quickSortBySize(List<TShirt> arr, int low, int high, int sortOrder) 
+    public List<TShirt> quickSortBySize(int low, int high, int sortOrder) 
     { 
+        List<TShirt> arr = this.tShirts;
         List<TShirt> arr2 = arr; 
         if (low < high) 
         { 
@@ -177,8 +179,8 @@ public class Sort {
   
             // Recursively sort elements before 
             // partition and after partition 
-            quickSortBySize(arr2, low, pi-1, sortOrder); 
-            quickSortBySize(arr2, pi+1, high, sortOrder); 
+            quickSortBySize(low, pi-1, sortOrder); 
+            quickSortBySize(pi+1, high, sortOrder); 
         } 
         return arr2;
     } 
